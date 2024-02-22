@@ -1,0 +1,283 @@
+//初始化
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    scroll-behavior:smooth; /*滑動跳轉*/
+}
+
+
+//variable
+
+//colors
+$bg-color:#FFFFFF;
+$first-color:#000;
+$second-color:#0067b8; /*a連結*/
+$second-hover-color:#045fa0; /*a連結*/
+$third-color:#616161; /*小字*/
+$fourth-color:#ffb900; /*新上市按鈕*/
+$navbtn-color:#262626;
+$hide-color:#F2F2F2;
+
+//fonts
+$body-font: "Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
+
+$font-regular:400;
+$font-h2:500;
+$font-buy:600;
+$font-medium:700;
+$font-bold:900;
+
+$biggest-font-size:2.3rem;
+$bigger-font-size:1.8rem;  //nav大字
+$big-font-size:1.5rem;  //nav大字
+$h3-font-size:1.25rem; //20px
+$usual-font-size:1rem;
+$small-font-size:.9rem; //15px 底下標題
+$smaller-font-size:.8rem;  //13px navbtn
+$smallest-font-size:.7rem;  //11px 底下小字
+
+// $biggest-font-size:7.5rem;  //120px
+// $bigger-font-size:5rem;     //80px
+// $big-font-size:3rem;        //48px
+// $normal-font-size:2rem;     //32px
+// $small-font-size:1.25rem;   //20px
+// $smaller-font-size:1rem;
+// $smallest-font-size:.875rem; //14px
+
+
+//Line height
+$line-height-large:150%;  
+$line-height-medium:120%;
+
+//magin
+.mb16{
+    margin-bottom: 16px;
+}
+.mb32{
+    margin-bottom: 32px;
+}
+.mb40{
+    margin-bottom: 40px;
+}
+.mb64{
+    margin-bottom: 64px;
+}
+.mb80{
+    margin-bottom: 80px;
+}
+
+
+
+
+//main
+*,*::before,*::after{
+    box-sizing: border-box;
+}
+
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+ul{
+    list-style: none;
+}
+
+i{
+    color: $first-color;
+}
+
+a{
+    display: inline-block;
+    text-decoration: none;
+    color: $second-color;
+}
+
+
+input[type="search"]{
+
+    /*不要出現清除叉叉*/
+    &::-webkit-search-cancel-button{
+       -webkit-appearance: none !important;
+    }
+    &::-ms-clear{
+        display: none !important;
+    }
+    /**/
+
+    &:focus-visible{
+        outline:none;
+        border: 2px solid #007bff;
+    }
+}
+
+footer a{
+    font-size: $smallest-font-size;
+    color: $third-color;
+}
+
+//nav-btn底線效果
+.nav-btn{
+    position: relative;
+    a::after{
+        content: "";
+        position: absolute;
+        display: none;
+        left: 5px;
+        bottom: 5px; 
+        width: 80%;
+        height: 1px;
+        background-color: $third-color
+    }
+    .text::after{
+        content: "";
+        position: absolute;
+        display: none;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 1px;
+        background-color: $third-color
+    }
+
+    &:hover{
+        a::after{
+            display: inline-block;
+        }
+    }
+}
+
+//new-tag{
+.new-tag{
+    background-color: $fourth-color;
+    border-radius: 2px;
+    color: $first-color;
+    padding: 3px 12px;
+    display: inline-block;
+    font-size: $usual-font-size;
+    font-weight: $font-medium;
+    position: absolute;
+    left: 0;
+    top: -30px;
+}
+
+//藍色btn
+.blueBtn{
+    width: 90px;
+    height: 40px;
+    display: inline-flex;
+    background-color: $second-color;
+    border-radius: 2px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    a{
+        color: $bg-color;
+        padding: 4.5px 8px;
+        font-size: $usual-font-size;
+        font-weight: $font-medium;
+        &:focus{
+            border: 2.5px dashed white;
+        }
+    }
+
+    &:active,&:focus {
+        a{
+            border: 2.5px dashed white;
+        }
+    }
+    &:hover{
+        background-color: $second-hover-color;
+    }
+                            
+}
+
+//漢堡清單//
+.nav-btn > .menu-btn-list{
+    display: none;
+    position: absolute;
+    left: -8px;
+    width: 97.8vw;
+    height: auto;
+    background-color: $hide-color;
+    border: 1px solid #dedede;
+    border-bottom: 1.5px solid #2d2d2d;
+
+    .list-title{
+        display: flex;
+        flex-direction: column;
+        a{
+            padding: 15px;
+            font-size:$usual-font-size;
+            font-weight: 350;
+            border-bottom: 1px solid #dedede;
+            display: flex;
+            justify-content: space-between;
+
+            span:first-child{
+                font-size:$usual-font-size !important;
+            }
+        }
+        .list-content{
+            width: 96%;
+            align-self: flex-end;
+        }
+    }
+}
+
+//指令
+.hide{
+    display: none !important;
+}
+.viewF{
+    display: flex !important;
+}
+.view{
+    display: block !important;
+}
+
+.grayBtn{
+    background-color: $hide-color ;
+}
+
+.btn-hide-scale{
+    background-color: $hide-color;
+    border: 2.5px solid $hide-color;
+
+    .btn-hide{
+        padding: 14px 8px !important;
+    }
+    &:hover{
+        a::after{
+            display:none ;
+        }
+    }
+}
+.all-hide-scale{
+    background-color: $hide-color;
+    border: 2.5px solid $hide-color;
+
+    .first{
+        padding: 14px 8px !important;
+    }
+    a:hover{
+        .text::after{
+            display:none !important;
+        }
+    }
+}
+
+.cancle-arrow{
+    font-size: 1.5rem !important;
+    font-weight: 200 !important;
+    padding: 5px 8px !important;
+}
+
+

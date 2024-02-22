@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            scroll-behavior:smooth; /*滑動跳轉*/
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root{
+            scroll-padding-top: 10vh;  /*跳轉時減去nav高度*/
+        }
+        
+        ul,li{
+            list-style: none;
+            padding: 0;
+        }
+
+        .all{
+            width: 80%;
+            height: 100vh;
+            margin: 0 auto;
+        }
+
+        a{
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            display: block;
+        }
+
+        a:active{
+            color: #4c6954;
+        }
+
+        .nav{
+            width: 80%;
+            height: 10vh;
+            background-color: antiquewhite;
+            padding: 12px;
+            position: fixed;
+            z-index: 1;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0px 1px 5px #919191;
+        }
+
+        .nav-logo{
+            height: 100%;
+        }
+        
+        .nav-logo img{
+            border-radius: 50%;
+            height: 100%;
+            border: 3px solid rgb(254, 255, 239);
+        }
+
+        .nav-logo img:hover{
+            transform: scale(1.1);
+            transition:  .3s ease-out;
+        }
+        
+        .btn{
+            color: white;
+            margin-left: 5px;
+            background-color: rgb(172, 186, 150);
+            border-radius: 1rem;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .btn:hover{
+            background-color: rgb(198, 218, 167);
+        }
+
+        .nav-btn{
+            position: absolute;
+            padding: 0 12px;
+            right: 0;
+            top: calc(5vh - 12px);
+        }
+
+        .nav-btn-2:hover{
+            background-color: rgb(168, 206, 208);
+        }
+        .nav-btn-2 a:active{
+           color: #55526e;
+        }
+        .nav-btn-3:hover{
+            background-color: rgb(208, 168, 168);
+        }
+        .nav-btn-3 a:active{
+            color: #744141;
+        }
+
+
+        main{
+            width: calc(100% + 24px);
+            height: 100vh;
+            padding-top: 13vh;
+            background-color: rgb(218, 203, 183);
+        }
+
+        .banner{
+            width: 100%;
+            height: 90vh;
+            opacity: 90%;
+            background-position:center;
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .banner-1{
+            background-image: url(./img/banner.jpg);
+
+        }
+        .banner-2{
+            background-image: url(./img/banner2.jpg);
+
+        }
+        .banner-3{
+            background-image: url(./img/banner3.jpg);
+        }
+
+        .mask{
+            width: 100%;
+            height: 40%;
+            background-color: rgb(74, 56, 56);
+            opacity: 40%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .mask-btn{
+            width: 150px;
+            height: 50px;
+            background-color: antiquewhite;
+            border-radius: .5rem;
+            color: rgb(32, 29, 29);
+            text-align: center;
+            line-height: 50px;
+            letter-spacing: 2px;
+            position: absolute;
+            bottom: 13%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        .mask-btn:hover{
+            opacity: 80%;
+            color: #4c6954;
+            font-weight: bold;
+            letter-spacing: 5px;
+        }
+        .mask-btn-2:hover{
+            opacity: 80%;
+            color: #55526e;
+        }
+        .mask-btn-3:hover{
+            opacity: 80%;
+            color: #744141;
+        }
+
+        .gotop{
+            width: 100px;
+            height: 100px;
+            background-color: antiquewhite;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 100px;
+            color: #4c6954;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 2px;
+            position: fixed;
+            bottom: 10px;
+            right: 30px;
+        }
+        .gotop:hover{
+            background-color: rgb(172, 186, 150);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <nav class="nav">
+            <div class="nav-logo">
+                <img src="./img/icon.JPG" alt="icon">
+            </div>
+            <ul class="nav-btn">
+                <li class="btn nav-btn-1"><a href="#banner-1">FIRST</a></li>
+                <li class="btn nav-btn-2"><a href="#banner-2">SECOND</a></li>
+                <li class="btn nav-btn-3"><a href="#banner-3">THIRD</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="banner banner-1" id="banner-1">
+                <div class="mask"></div>
+                <div class="mask-btn">FIRST</div>
+            </div>
+            <div class="banner banner-2" id="banner-2">
+                <div class="mask"></div>
+                <div class="mask-btn mask-btn-2">SECOND</div>
+            </div>
+            <div class="banner banner-3" id="banner-3">
+                <div class="mask"></div>
+                <div class="mask-btn mask-btn-3">THIRD</div>
+            </div>
+        </main>
+        <a href="#" class="gotop">TOP</a>
+
+    </div>
+</body>
+</html>

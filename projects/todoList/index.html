@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./style.css">
+    <title>待辦事項</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="top">
+            <input type="text" placeholder="請填寫事項">
+            <div class="button">
+                <span class="material-symbols-outlined">task</span>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="btns">
+                <div class="btn all active" data-search="all">全部</div>
+                <div class="btn done" data-search="done">已執行</div>
+                <div class="btn unDo" data-search="unDo">未執行</div>
+                <div class="button loc">更新資料</div>
+            </div>
+
+            <div class="title">
+                <span>執行</span>
+                <span>事項</span>
+                <span>功能</span>
+            </div>
+
+            <div class="list">
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const list = document.querySelector('.list');
+        const addText = document.querySelector('.top input');
+        const addBtn = document.querySelector('.top .button');
+        const sortBtns = document.querySelectorAll('.btns > .btn');
+        const allBtn = document.querySelector('.btns > .all');
+        const unDoBtn = document.querySelector('.btns > .unDo');
+        const locBtn = document.querySelector('.button.loc');
+
+        let arr = [];
+        let doneArr = [];
+        let unDoArr = [];
+        let id = arr.length;
+
+
+
+        if (localStorage.getItem('todoList')) { //取得JSON string
+            arr = JSON.parse(localStorage.getItem('todoList')) //轉換為JS可以處理的陣列/物件格式
+        }
+
+        locBtn.addEventListener('click', () => {
+            if (arr.length === 0) {
+                localStorage.clear();
+            } else {
+                //製作成JSON string，以利儲存至localStorage裡面
+                const arrData = JSON.stringify(arr);
+                // localStorage 存入數據
+                localStorage.setItem('todoList', arrData);
+            }
+        })
+
+
+
+        let JsonText = JSON.stringify(arr);
+        let parseText = JSON.parse(JsonText);
+
+        switchData();
+        //篩選按鈕
+        sortBtns.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                sortBtns.forEach(i => i.classList.remove('active'));
+                switch (btn.dataset.search) {
+                    case 'all':
+                        btn.classList.add('active');
+                        output(arr);
+                        break;
+
+                    case 'done':
+                        btn.classList.add('active');
+                        doneArr = arr.filter(item => { return item.check === true })
+                        output(doneArr);
+                        break;
+
+                    case 'unDo':
+                        btn.classList.add('active');
+                        unDoArr = arr.filter(item => { return item.check !== true })
+                        output(unDoArr);
+                        break;
+
+                    default:
+                        btn.classList.add('active');
+                        output(arr);
+                        break;
+                }
+            })
+
+        });
+
+        //增加按鈕
+        addBtn.addEventListener('click', () => {
+            let text = addText.value;
+
+            if (text != '') {
+                let addArr = {
+                    id: id + 1,
+                    check: false,
+                    text: text,
+                }
+                arr.push(addArr);
+                id = arr[arr.length - 1].id;
+                addText.value = '';
+
+            }
+
+            switchData();
+
+            //增加動畫
+            const listItem = document.querySelector('.list-item:last-child');
+            const listItems = document.querySelectorAll('.list-item');
+            listItems.forEach((item) => { item.classList.remove('pre-animation'); })
+            listItem.classList.add('pre-animation');
+
+            setTimeout(function () {
+                listItem.classList.remove('pre-animation');
+            }, 100)
+
+        })
+
+        function editText(id) {
+            arr.map((item) => {
+                if (item.id == id) {
+                    const content = prompt('修改執行事項');
+                    if (content == '' || content == null) {
+                        return;
+                    } else {
+                        item.text = content;
+                    }
+                }
+            })
+
+            switchData();
+        }
+
+        function deleteText(id) {
+            if (confirm('是否要刪除?') == true) {
+                const deleteArr = arr.filter((item) => {
+                    if (item.id != id) {
+                        return item;
+                    }
+                });
+                arr = deleteArr;
+
+                switchData();
+            }
+        }
+
+        function output(array) {
+            list.innerHTML = '';
+            array.forEach((item) => {
+                list.innerHTML += `
+                    <div class="list-item">
+                        <input type="checkbox" ${item.check == true ? 'checked' : ''} onclick ='checkTodo(${item.id})'>
+                        <span ${item.check == true ? "class='doneText'" : ''} >${item.text}</span>
+                        <div class="list-btn">
+                            <div class="edit" onclick = 'editText(${item.id})'>
+                                <span class="material-symbols-outlined">edit_square</span>
+                            </div>
+                            <div class="delete" onclick = 'deleteText(${item.id})'>
+                                <span class="material-symbols-outlined">delete</span>
+                            </div>
+                        </div>
+                    </div>
+                `
+            })
+        }
+
+        function checkTodo(id) {
+            let checkbox = document.querySelectorAll('.list-item > input');
+            let delText = document.querySelectorAll('.list-item > span');
+            arr.map((item) => {
+                if (item.id == id) {
+                    item.check = !item.check;
+                }
+            })
+            switchData();
+        }
+
+        //篩選顯示資料
+        function switchData() {
+            if (allBtn.classList.contains('active')) {
+                output(arr);
+            } else if (unDoBtn.classList.contains('active')) {
+                unDoArr = arr.filter(item => { return item.check !== true });
+                output(unDoArr);
+            } else {
+                doneArr = arr.filter(item => { return item.check === true });
+                output(doneArr);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

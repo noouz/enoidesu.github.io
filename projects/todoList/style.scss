@@ -1,0 +1,178 @@
+body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to top, rgb(44, 62, 175), pink);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main {
+    width: 70%;
+    height: 80%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.521);
+    padding: 20px 15px;
+
+    .top {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 20px;
+        column-gap: 12px;
+
+        input {
+            padding: 5px;
+            flex: 1;
+        }
+    }
+
+    .bottom {
+        width: 100%;
+        height: 100%;
+
+        .btns {
+            display: flex;
+            justify-content: start;
+            column-gap: 10px;
+            border-bottom: 1px solid gray;
+            .button.loc{
+                width: auto;
+                margin-left: auto;
+                padding: 0 8px;
+                background: linear-gradient(to top,rgb(118, 118, 118),rgb(175, 161, 164));
+                &:hover{
+                    opacity: 90%;
+                }
+            }
+        }
+
+        .title {
+            display: flex;
+            justify-content: start;
+            padding: 10px 0;
+            border-bottom: 1px solid gray;
+
+            span {
+                font-size: 1.1rem;
+                width: 30%;
+                text-align: center;
+            }
+
+            span:first-child {
+                width: 20%;
+                text-align: start;
+            }
+
+            span:nth-child(2) {
+                width: 50%;
+                text-align: start;
+            }
+        }
+
+        .list {
+            overflow-y: auto;
+            height: 70%;
+
+            .list-item {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                padding: 10px;
+                box-shadow: 0px 1px 2px rgba(128, 128, 128, 0.573);
+                transition: transform .6s ease-in-out, opacity .6s ease-in-out;
+                opacity: 1;
+                transform: translateY(0px);
+
+                input,
+                span,
+                div {
+                    display: flex;
+                    justify-content: start;
+
+                }
+
+                input {
+                    padding-right: 50px;
+                    margin: 0;
+                    margin-right: 18%;
+                }
+
+                span {
+                    width: 60%;
+                    padding: 0 5px;
+                }
+
+                .list-btn {
+                    width: 30%;
+                    display: flex;
+                    column-gap: 10px;
+
+                    div {
+                        width: 150px;
+                        color: white;
+                        cursor: pointer;
+                        background: linear-gradient(to top, rgb(44, 62, 175), pink);
+                        border-radius: 8px;
+                        display: inline-flex;
+                        padding: 5px;
+                        justify-content: center;
+                        align-items: center;
+
+                        span {
+                            width: auto;
+                        }
+                    }
+
+                }
+            }
+
+        }
+    }
+}
+
+
+
+.button {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(to top, rgb(44, 62, 175), pink);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 1px 5px;
+    /* .button:hover{
+        opacity: 50%;
+    } */
+}
+
+.btn {
+    width: auto;
+    border-radius: 8px 8px 0 0;
+    background-color: rgb(44, 62, 175);
+    color: white;
+    padding: 10px 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.active {
+    background-color: rgb(200, 177, 1);
+}
+
+.doneText {
+    text-decoration: line-through;
+}
+
+.pre-animation {
+    opacity: 0 !important;
+    transform: translateY(-10px) !important;
+    transition: transform .6s ease-in-out, opacity .6s ease-in-out;
+}
